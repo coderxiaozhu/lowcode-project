@@ -1,25 +1,29 @@
 <template>
-  <div class="common-layout">
-    <el-container>
+  <div class="home-container">
+  我是home组件
+    <!-- <el-container>
       <el-header>xz-lowcode</el-header>
-      <el-main> </el-main>
+      <el-main>
+        <el-row>
+          我是home组件
+        </el-row>
+      </el-main>
       <el-footer> coderxiaozhu-project </el-footer>
-    </el-container>
+    </el-container> -->
+  
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <style lang="scss" scoped>
-.el-header,
-.el-footer {
-  background: #000;
-  color: #fff;
-  box-sizing: border-box;
-  padding-top: 20px;
-}
-.el-footer {
-  text-align: center;
-  font-weight: 700;
+.home-container {
+  background: #fff;
+  padding: 0 24px 24px 30px;
+  min-height: 85vh;
+  max-width: 1200px;
+  margin: 50px auto;
+  width: 100%;
 }
 </style>
