@@ -98,11 +98,11 @@ src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7
         transition: all .2s ease-in;
         cursor: pointer;
     }
-    
+
     .hoverItem {
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,.8);
+        background-color: rgba(0, 0, 0, .8);
         position: absolute;
         left: 0;
         top: 0;
