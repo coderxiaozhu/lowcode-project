@@ -1,18 +1,32 @@
 <template>
-    <component :is="tag" :style="styleProps" class="z-text-component">
+    <component :is="tag" :style="styleProps" class="z-text-component" @click="handleClick">
         {{ text }}
     </component>
 </template>
 
-<script setup lang='ts'>
-import { computed } from 'vue';
-import { pick } from 'lodash-es';
-const props = defineProps<{
-    text: string,
-    fontSize: string,
-    tag?: string
-}>()
-const styleProps = computed(() => pick(props, ['fontSize']))
+<script lang='ts'>
+import { defineComponent } from 'vue';
+import { textDefaultProps, textStylePropNames, transformToComponentProps } from '../defaultProps';
+import useComponentComoon from '../hooks/useComponentCommon'
+const defaultProps = transformToComponentProps(textDefaultProps)
+export default defineComponent({
+  props: {
+    tag: {
+      type: String,
+      default: "div"
+    },
+    ...defaultProps
+  },
+  setup(props) {
+    // 获取样式属性
+    const { styleProps, handleClick } = useComponentComoon(props, textStylePropNames)
+    return {
+      styleProps,
+      handleClick
+    }
+  }
+})
+
 </script>
 
 <style scoped>

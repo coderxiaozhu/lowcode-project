@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { computed, Component } from 'vue';
 import { useEditorStore } from '../store/editor';
-import Ztext from '../components/Ztext.vue';
+import Ztext from '../components/ZText.vue';
 // 组件实例映射表类型
 export interface ComponentMap {
     [key: string]: Component
