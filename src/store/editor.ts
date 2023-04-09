@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
+import { PartialTextComponentProps } from '../defaultProps'
 // 组件数据结构
 export interface ComponentData {
   // 元素属性
@@ -57,9 +58,30 @@ export const useEditorStore = defineStore('editor', {
   state: () => {
     return {
       // 组件列表
-      component: testComponentData,
+      components: testComponentData,
       // 当前操作的组件
       currentElement: ''
+    }
+  },
+  actions: {
+    // 添加画布组件
+    addComponent(props: PartialTextComponentProps) {
+      const newComponentData: ComponentData = {
+        id: uuidv4(),
+        name: 'z-text',
+        props
+      }
+      this.components.push(newComponentData)
+    },
+    // 激活组件
+    setActive(currentId: string) {
+      this.currentElement = currentId
+    }
+  },
+  getters: {
+    // 获取当前激活组件
+    getCurrentElement(state) {
+      return state.components.find((c) => c.id === state.currentElement)
     }
   }
 })
