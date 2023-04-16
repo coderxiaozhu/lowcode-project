@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
 import { PartialTextComponentProps } from '../defaultProps'
+import type { TextComponentProps } from '../defaultProps'
 // 组件数据结构
 export interface ComponentData {
   // 元素属性
@@ -27,7 +28,11 @@ const testComponentData: ComponentData[] = [
     props: {
       text: 'hello',
       fontSize: '20px',
-      tag: 'div'
+      tag: 'div',
+      lineHeight: '1',
+      color: '#ff3344',
+      textAlign: 'left',
+      fontFamily: '',
     }
   },
   {
@@ -37,7 +42,8 @@ const testComponentData: ComponentData[] = [
       text: 'hello2',
       fontSize: '14px',
       tag: 'div',
-      color: 'red'
+      color: '#3399',
+      lineHeight: '2',
     }
   },
   {
@@ -76,6 +82,14 @@ export const useEditorStore = defineStore('editor', {
     // 激活组件
     setActive(currentId: string) {
       this.currentElement = currentId
+    },
+    // 更新组件数据
+    updateComponent(e: any) {
+      const { key, value } = e;
+      const updateComponent = this.components.find(c => c.id === this.currentElement);
+      if (updateComponent) {
+        updateComponent.props[key as keyof TextComponentProps] = value
+      }
     }
   },
   getters: {

@@ -1,5 +1,6 @@
 <template>
-    <el-row :gutter="20">
+    <div>我是模板列表</div>
+    <!-- <el-row :gutter="20">
         <el-col :span="6" class="template-item">
             <el-card :body-style="{ padding: '0px' }" shadow="hover">
                 <div class="imgWapper">
@@ -59,7 +60,7 @@ src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7
                 </div>
             </el-card>
         </el-col>
-    </el-row>
+    </el-row> -->
 </template>
 
 <script setup lang="ts">

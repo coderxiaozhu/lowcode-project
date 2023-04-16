@@ -2,7 +2,7 @@
   <div class="loginWapper">
     <div class="box">
       <div class="title">欢迎回来</div>
-      <el-form
+      <!-- <a-form
         ref="ruleFormRef"
         :model="loginForm"
         :rules="rules"
@@ -10,21 +10,13 @@
         class="demo-ruleForm"
         status-icon
       >
-      </el-form>
+      </a-form> -->
     </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from 'element-plus'
-const rules = reactive<FormRules>({
-  name: [
-    { required: true, message: '手机号码', trigger: 'blur' },
-  ]
-})
-
-const loginForm = reactive({})
+import { reactive } from 'vue'
 
 </script>
 

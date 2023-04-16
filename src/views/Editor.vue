@@ -1,11 +1,11 @@
 <template>
     <div class="common-layout">
-        <ElContainer>
-            <ElAside width="300px">
+        <a-layout>
+            <a-layout-sider width="300px">
                 组件列表
                 <ComponentsList :list="defaultTemplates" @on-item-click="addItem" />
-            </ElAside>
-            <ElMain class="canvas-container">
+            </a-layout-sider>
+            <a-layout-content class="canvas-container">
                 <p>画布区域</p>
                 <div id="canvas-area" class="preview-list">
                     <editWrapper
@@ -15,12 +15,12 @@ v-for="component in components" :id="component.id" :key="component.id"
                         </component>
                     </editWrapper>
                 </div>
-            </ElMain>
-            <ElAside width="300px">
+            </a-layout-content>
+            <a-layout-sider width="300px">
                 组件属性
-                <div> {{ store.getCurrentElement && store.getCurrentElement.props }}</div>
-            </ElAside>
-        </ElContainer>
+                <propsTable v-if="store.getCurrentElement" :props="store.getCurrentElement.props" @change="handleChange" />
+            </a-layout-sider>
+        </a-layout>
     </div>
 </template>
 
@@ -31,6 +31,7 @@ import { useEditorStore } from '../store/editor';
 import Ztext from '../components/ZText.vue';
 import ComponentsList from '../components/ComponentsList.vue';
 import editWrapper from '../components/EditWrapper.vue';
+import propsTable from '../components/PropsTable.vue';
 import { defaultTemplates } from '../defaultTemplates'
 import { PartialTextComponentProps } from '../defaultProps'
 // 组件实例映射表类型
@@ -51,13 +52,21 @@ const addItem = (props: PartialTextComponentProps) => {
 const setActive = (id: string) => {
     store.setActive(id)
 }
+// 组件修改状态的change事件
+const handleChange = (e: any) => {
+    store.updateComponent(e)
+}
 </script>
 
 <style lang="scss" scoped>
 .common-layout,
-.el-container {
+.ant-layout {
     width: 100%;
     height: 100%;
+}
+
+.ant-layout-sider {
+    background-color: #fff;
 }
 
 .common-layout .canvas-container {

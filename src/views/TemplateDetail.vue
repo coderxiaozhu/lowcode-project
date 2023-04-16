@@ -8,7 +8,7 @@
             <p>1024 程序员日</p>
             <div class="author">
                 <span class="avaterImg">
-                    <el-icon><User /></el-icon>
+                    <!-- <el-icon><User /></el-icon> -->
                 </span>
                 <span class="avaterDes">
                     该模板由
@@ -21,8 +21,8 @@
                 <canvas id="barcode-container"></canvas>
             </div>
             <div class="user-button">
-                <el-button type="primary" size="large">使用模板</el-button>
-                <el-button size="large">下载图片海报</el-button>
+                <a-button type="primary" size="large">使用模板</a-button>
+                <a-button size="large">下载图片海报</a-button>
             </div>
         </div>
     </div>
