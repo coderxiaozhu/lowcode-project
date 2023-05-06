@@ -5,6 +5,7 @@
         <div class="title">
             <router-link to="/">xz-lowcode</router-link>
         </div>
+        <UserProfile :user="user" />
       </a-layout-header>
       <a-layout-content>
         <a-row>
@@ -17,10 +18,18 @@
 </template>
 
 <script setup lang='ts'>
+import { computed } from 'vue';
+import UserProfile from '../components/UserProfile.vue';
+import { useUserStore } from '../store/user'
+const store = useUserStore()
+const user = computed(() => store.user)
 </script>
 
 <style lang="scss" scoped>
 .ant-layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
     a {
       color: #fff;
       text-decoration: none;

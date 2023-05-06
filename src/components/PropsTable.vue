@@ -7,13 +7,12 @@
 v-bind="item?.extraProps" :is="item?.component" v-if="item.valueProp" :[item.valueProp]="item?.value"
           v-on="item.events">
           <template v-if="item.options">
-            <component
-:is="item.subComponent"
-                       v-for="(option, key) in item.options"
-                       :key="key"
-                       :value="option.value">
+            <component :is="item.subComponent" v-for="(option, key) in item.options" :key="key" :value="option.value">
               <renderVnode :v-node="option.text"></renderVnode>
             </component>
+          </template>
+          <template v-else-if="item.component === 'color-picker'">
+            <ColorPicker :value="item.value" v-on="item.events" />
           </template>
         </component>
       </div>
@@ -22,9 +21,10 @@ v-bind="item?.extraProps" :is="item?.component" v-if="item.valueProp" :[item.val
 </template>
 
 <script setup lang='ts'>
-import { computed, VNode } from 'vue';
+import { computed, VNode, ref } from 'vue';
 import { reduce } from 'lodash-es';
 import renderVnode from '../components/RenderVnode'
+import ColorPicker from './ColorPicker.vue';
 import { mapPropsToForms } from '../propsType';
 import type { PartialTextComponentProps } from '../defaultProps';
 export interface privateProps {
@@ -49,7 +49,6 @@ const props = defineProps<privateProps>();
 const emit = defineEmits<{
   (e: 'change', data: any): void
 }>()
-
 // 获取属性映射列表
 const propsMapList = computed(() => {
   return reduce(props.props, (result, value, key) => {
@@ -64,7 +63,6 @@ const propsMapList = computed(() => {
         eventName,
         events: {
           [eventName]: (e: any) => {
-            console.log(e);
             emit('change', { key, value: afterTransform ? afterTransform(e) : e })
           }
         }
@@ -82,9 +80,11 @@ const propsMapList = computed(() => {
   margin-bottom: 20px;
   align-items: center;
 }
+
 .label {
   width: 28%;
 }
+
 .prop-component {
   width: 70%;
 }

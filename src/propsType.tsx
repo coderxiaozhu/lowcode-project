@@ -103,5 +103,10 @@ export const mapPropsToForms: PropsToForms = {
       ...fontFamilyOptions
     ],
     afterTransform: (e: any) => e
+  },
+  color: {
+    component: 'color-picker',
+    text: '字体颜色',
+    afterTransform: (e: any) => typeof e === 'object' ? e.target.value : e
   }
 }
