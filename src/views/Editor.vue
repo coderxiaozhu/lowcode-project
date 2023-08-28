@@ -4,6 +4,7 @@
             <a-layout-sider width="300px">
                 组件列表
                 <ComponentsList :list="defaultTemplates" @on-item-click="addItem" />
+                <Uploader />
             </a-layout-sider>
             <a-layout-content class="canvas-container">
                 <p>画布区域</p>
@@ -32,6 +33,7 @@ import Ztext from '../components/ZText.vue';
 import ComponentsList from '../components/ComponentsList.vue';
 import editWrapper from '../components/EditWrapper.vue';
 import propsTable from '../components/PropsTable.vue';
+import Uploader from '../components/Uploader.vue';
 import { defaultTemplates } from '../defaultTemplates'
 import { PartialTextComponentProps } from '../defaultProps'
 // 组件实例映射表类型
