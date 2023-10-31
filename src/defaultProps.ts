@@ -69,6 +69,7 @@ export interface TextComponentProps extends CommonComponentProps {
   textAlign: string
   color: string
   backgroundColor: string
+  tag: string
 }
 
 // z-text 组件特有属性
@@ -84,6 +85,7 @@ export const textDefaultProps = {
   textAlign: 'left',
   color: '#000000',
   backgroundColor: '',
+  tag: 'div',
   ...commonDefaultProps
 }
 
@@ -99,6 +101,7 @@ export const textStylePropNames = without(
 export const transformToComponentProps = <T extends { [key: string]: any }>(
   props: T
 ) => {
+  console.log(props);
   return mapValues(props, item => {
     return {
       type: item.constructor,

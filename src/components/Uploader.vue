@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 import axios from 'axios'
-import { ref, reactive, computed, PropType } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { last } from 'lodash-es'
 import {
@@ -73,35 +73,23 @@ export type UploadStatus = 'ready' | 'loading' | 'success' | 'error'
 export type FileListType = 'picture' | 'text'
 // 上传文件函数
 export type CheckUpload = (file: File) => boolean | Promise<File>
-const props = defineProps({
-  action: {
-    type: String,
-    default: ''
-  },
-  beforeUpload: {
-    type: Function as PropType<CheckUpload>
-  },
-  // 拖拽上传
-  drag: {
-    type: Boolean,
-    default: false
-  },
-  // 自动上传
-  autoUpload: {
-    type: Boolean,
-    default: true
-  },
-  listType: {
-    type: String as PropType<FileListType>,
-    default: 'text'
-  },
-  // 是否显示文件列表
-  showUploadList: {
-    type: Boolean,
-    default: false
-  }
-})
 // 上传文件的文件类型
+interface propsType {
+  action: string;
+  beforeUpload?: (file: File) => boolean | Promise<File>;
+  drag: boolean;
+  autoUpload: boolean;
+  listType: string;
+  showUploadList: boolean
+}
+// 传入的参数有些会为空
+const props = withDefaults(defineProps<Partial<propsType>>(), {
+  action: "",
+  drag: false,
+  autoUpload: true,
+  listType: 'text',
+  showUploadList: false
+})
 export interface UploadFile {
   uid: string
   size: number
@@ -157,7 +145,7 @@ const postFile = (readyFile: UploadFile) => {
       readyFile.status = 'success'
       readyFile.resp = res.data
     })
-    .catch(err => {
+    .catch(() => {
       readyFile.status = 'error'
     })
     .finally(() => {
@@ -214,11 +202,11 @@ const beforeUploadCheck = (file: null | FileList) => {
   }
 }
 // 上传文件列表
-const uploadFiles = () => {
-  fileList.value
-    .filter(file => file.status === 'ready')
-    .forEach(readyFile => postFile(readyFile))
-}
+// const uploadFiles = () => {
+//   fileList.value
+//     .filter(file => file.status === 'ready')
+//     .forEach(readyFile => postFile(readyFile))
+// }
 // 上传文件到服务器
 const handleFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement

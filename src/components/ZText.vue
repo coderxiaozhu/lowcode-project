@@ -4,28 +4,13 @@
     </component>
 </template>
 
-<script lang='ts'>
-import { defineComponent } from 'vue';
-import { textDefaultProps, textStylePropNames, transformToComponentProps } from '../defaultProps';
+<script setup lang='ts'>
+import { textDefaultProps, textStylePropNames, TextComponentProps } from '../defaultProps';
 import useComponentComoon from '../hooks/useComponentCommon'
-const defaultProps = transformToComponentProps(textDefaultProps)
-export default defineComponent({
-  props: {
-    tag: {
-      type: String,
-      default: "div"
-    },
-    ...defaultProps
-  },
-  setup(props) {
-    // 获取样式属性
-    const { styleProps, handleClick } = useComponentComoon(props, textStylePropNames)
-    return {
-      styleProps,
-      handleClick
-    }
-  }
+const defaultProps = withDefaults(defineProps<Partial<TextComponentProps>>(), {
+  ...textDefaultProps
 })
+const { styleProps, handleClick } = useComponentComoon(defaultProps, textStylePropNames)
 </script>
 
 <style scoped>

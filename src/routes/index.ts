@@ -14,7 +14,7 @@ const router = createRouter({
           meta: {
             title: "欢迎来到xz的lowcode平台"
           },
-          component: () => import("../views/Home.vue")
+          component: () => import("../views/home.vue")
         },
         {
           path: '/template/:id',

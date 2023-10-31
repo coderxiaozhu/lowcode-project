@@ -1,6 +1,9 @@
 <template>
   <div class="home-container">
   我是home组件
+  <div class="w-50">
+    546565555
+  </div>
     <!-- <el-container>
       <el-header>xz-lowcode</el-header>
       <el-main>
